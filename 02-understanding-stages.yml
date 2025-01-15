@@ -1,0 +1,77 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build
+  jobs:
+  - job: FirstBuildJob
+    steps:
+    - bash: echo Buld FirstJob
+    - bash: echo PipelineLevelVariable is $(PipelineLevelVariable)
+    - bash: echo Build.BuildNumber is $(Build.BuildNumber)
+    - bash: echo Build.BuildId is $(Build.BuildId)
+    - bash: echo Build.SourceBranchName is $(Build.SourceBranchName)
+    - bash: echo Build.SourcesDirectory is $(Build.SourcesDirectory)
+    - bash: echo System.DefaultWorkingDirectory is $(System.DefaultWorkingDirectory)
+    - bash: ls -la $(System.DefaultWorkingDirectory)
+    - bash: echo Build.ArtifactStagingDirectory is $(Build.ArtifactStagingDirectory)
+    - bash: java -version
+    - bash: node --version
+    - bash: python --version
+    - bash: ls -la $(Build.ArtifactStagingDirectory)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: |
+          **/*.yml
+          **/*.yaml
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - bash: ls -la $(Build.ArtifactStagingDirectory)
+    
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+  # - job: SecondBuildJob
+  #   steps:
+  #   - bash: echo Buld SecondJob
+
+# - stage: DevDeploy
+#   variables:
+#     environment: Dev
+#   dependsOn: Build 
+#   jobs:
+#   - job: DevDeployJob
+#     steps:
+#     - bash: echo Job $(environment)Deploy
+
+# - stage: QaDeploy
+#   variables:
+#     environment: QA
+#   dependsOn: Build 
+#   jobs:
+#   - job: QaDeployJob
+#     steps:
+#     - bash: echo Job $(environment)Deploy
+
+# - stage: ProdDeploy
+#   variables:
+#     environment: PROD
+#   dependsOn:
+#   - DevDeploy
+#   - QaDeploy
+#   jobs:
+#   - job: ProdDeployJob
+#     steps:
+#     - bash: echo Job $(environment)Deploy
+
+
