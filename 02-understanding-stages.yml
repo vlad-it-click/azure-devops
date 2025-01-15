@@ -35,6 +35,12 @@ stages:
           **/*.yaml
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - bash: ls -la $(Build.ArtifactStagingDirectory)
+    
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
   # - job: SecondBuildJob
   #   steps:
   #   - bash: echo Buld SecondJob
