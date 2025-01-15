@@ -32,7 +32,7 @@ stages:
      runOnce:
        deploy:
          steps:
-          - script: echo "Deploy job to  " $(environment)
+          - script: echo "Deploy job to  DEV" 
 
 - stage: QADeploy
   jobs:
@@ -42,7 +42,7 @@ stages:
      runOnce:
        deploy:
          steps:
-          - script: echo "Deploy job to  " $(environment)
+          - script: echo "Deploy job to  QA"
 
 
 # steps:
