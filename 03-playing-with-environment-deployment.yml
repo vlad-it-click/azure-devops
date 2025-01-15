@@ -14,7 +14,8 @@ trigger:
 #       operatingSystem: 'macos-latest'
 
 pool:
-  vmImage: $(operatingSystem)
+  # vmImage: $(operatingSystem)
+  vmImage: 'ubuntu-latest'
 
 stages:
 - stage: Build
