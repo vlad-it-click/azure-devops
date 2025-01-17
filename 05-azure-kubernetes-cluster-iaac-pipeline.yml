@@ -46,7 +46,7 @@ steps:
   inputs:
     command: plan
     environmentServiceName: 'azure-resorce-manager-service-connection'
-    commandOptions: '-destroy -var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath) -out=$(System.DefaultWorkingDirectory)/terraform.tfplan'
+    commandOptions: '-destroy -out=$(System.DefaultWorkingDirectory)/terraform.tfplan'
 
 - task: TerraformCLI@2
   displayName: 'terraform show'
