@@ -26,6 +26,13 @@ steps:
     backendAzureRmContainerName: 'storageacctawsvamscontainer'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
 
+- task: TerraformCLI@2
+  displayName: 'terraform plan'
+  inputs:
+    command: plan
+    environmentServiceName: 'azure-resorce-manager-service-connection'
+    publishPlanResults: 'my_k8s_cluster_plan'
+
 # - task: TerraformCLI@2
 #   displayName: 'terraform apply'
 #   inputs:
@@ -41,21 +48,21 @@ steps:
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
 #     environmentServiceName: 'azure-resorce-manager-service-connection'
 
-- task: TerraformCLI@2
-  displayName: 'terraform plan'
-  inputs:
-    command: plan
-    environmentServiceName: 'azure-resorce-manager-service-connection'
-    commandOptions: '-destroy -out=$(System.DefaultWorkingDirectory)/terraform.tfplan'
-
-- task: TerraformCLI@2
-  displayName: 'terraform show'
-  inputs:
-    command: show
-    inputTargetPlanOrStateFilePath: '$(System.DefaultWorkingDirectory)/terraform.tfplan'
+# - task: TerraformCLI@2
+#   displayName: 'terraform plan to destroy'
+#   inputs:
+#     command: plan
+#     environmentServiceName: 'azure-resorce-manager-service-connection'
+#     commandOptions: '-destroy -out=$(System.DefaultWorkingDirectory)/terraform.tfplan'
 
 # - task: TerraformCLI@2
-#   displayName: 'terraform apply tfplan'
+#   displayName: 'terraform show to destroy'
+#   inputs:
+#     command: show
+#     inputTargetPlanOrStateFilePath: '$(System.DefaultWorkingDirectory)/terraform.tfplan'
+
+# - task: TerraformCLI@2
+#   displayName: 'terraform apply destroy tfplan'
 #   condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_DESTROY_CHANGES'], 'false'))
 #   inputs:
 #     command: apply
