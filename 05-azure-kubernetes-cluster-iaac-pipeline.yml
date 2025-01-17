@@ -26,7 +26,7 @@ steps:
     backendAzureRmContainerName: 'storageacctawsvamscontainer'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
 
-- task: TerraformCLI@2
+- task: TerraformCLI@1
   displayName: 'terraform plan'
   inputs:
     command: plan
