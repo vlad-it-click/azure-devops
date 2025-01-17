@@ -26,12 +26,12 @@ steps:
     backendAzureRmContainerName: 'storageacctawsvamscontainer'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
 
-- task: TerraformCLI@1
-  displayName: 'terraform plan'
-  inputs:
-    command: plan
-    environmentServiceName: 'azure-resorce-manager-service-connection'
-    publishPlanResults: 'my_k8s_cluster_plan'
+## - task: TerraformCLI@1
+##   displayName: 'terraform plan'
+##   inputs:
+##     command: plan
+##     environmentServiceName: 'azure-resorce-manager-service-connection'
+##     publishPlanResults: 'my_k8s_cluster_plan'
 
 # - task: TerraformCLI@2
 #   displayName: 'terraform apply'
@@ -41,12 +41,12 @@ steps:
 #     environmentServiceName: 'azure-resorce-manager-service-connection'
 #     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
 
-# - task: TerraformCLI@2
-#   displayName: 'terraform destroy'
-#   inputs:
-#     command: 'destroy'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-#     environmentServiceName: 'azure-resorce-manager-service-connection'
+#? - task: TerraformCLI@2
+#?   displayName: 'terraform destroy'
+#?   inputs:
+#?     command: 'destroy'
+#?     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+#?     environmentServiceName: 'azure-resorce-manager-service-connection'
 
 # - task: TerraformCLI@2
 #   displayName: 'terraform plan to destroy'
