@@ -4,25 +4,22 @@ kind: Deployment
 metadata:
   labels:
     app: myweb
-    version: azure
-  name: myweb-azure
+  name: myweb
   namespace: default
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: myweb
-      version: azure
   template:
     metadata:
       labels:
         app: myweb
-        version: azure
     spec:
       containers:
-      - image: vladreamer/azyre-myweb:55
+      - image: vladreamer/azyre-myweb
         imagePullPolicy: IfNotPresent
-        name: myweb-azure
+        name: myweb
         resources:
          limits:
            memory: 120Mi
@@ -38,7 +35,7 @@ kind: Service
 metadata:
   labels:
     app: myweb
-  name: myweb-svc
+  name: myweb
   namespace: default
 spec:
   ports:
@@ -48,5 +45,4 @@ spec:
     targetPort: 80
   selector:
     app: myweb
-  #type: LoadBalancer
-  type: NodePort
+  type: LoadBalancer
