@@ -19,4 +19,13 @@ spec:
               name: myweb-svc 
               port:
                 number: 80
-
+  - host: vlad2023.ingress
+    http:
+      paths:
+        - path: /php(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: myweb-php-svc 
+              port:
+                number: 80
