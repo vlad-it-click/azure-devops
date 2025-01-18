@@ -3,23 +3,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: myweb
-  name: myweb
+    app: myweb-php
+    version: php
+  name: myweb-php
   namespace: default
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: myweb
+      app: myweb-php
+      version: azure
   template:
     metadata:
       labels:
-        app: myweb
+        app: myweb-php
+        version: azure
     spec:
       containers:
-      - image: vladreamer/azyre-myweb
+      - image: vladreamer/azyre-myweb:55
         imagePullPolicy: IfNotPresent
-        name: myweb
+        name: myweb-php
         resources:
          limits:
            memory: 120Mi
@@ -34,15 +37,16 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: myweb
-  name: myweb
+    app: myweb-php
+  name: myweb-php-svc
   namespace: default
 spec:
   ports:
-  - nodePort: 32223
+  - nodePort: 32225
     port: 80
     protocol: TCP
     targetPort: 80
   selector:
-    app: myweb
-  type: LoadBalancer
+    app: myweb-php
+  #type: LoadBalancer
+  type: NodePort
