@@ -20,7 +20,7 @@ spec:
         version: azure
     spec:
       containers:
-      - image: vladreamer/azyre-myweb:55
+      - image: vladreamer/azyre-myweb:57
         imagePullPolicy: IfNotPresent
         name: myweb-php
         resources:
